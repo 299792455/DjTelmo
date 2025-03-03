@@ -1,0 +1,485 @@
+.parent-container { 
+  display: flex;
+  justify-content: flex-end; // Pousse le contenu à droite
+  margin-bottom: 60px;
+}
+
+.beats-title {
+  display: flex;
+  flex-direction: column;
+  // Aligne “MY” et “BEATS” sur leur bord gauche commun
+  align-items: flex-start;
+  text-transform: uppercase;
+  text-align: left;
+  // Pousse tout le bloc à droite en jouant sur l’auto-marge
+  margin-left: auto;
+  margin-right: 2rem; // ou 0, ou ce que tu veux
+
+  span {
+    font-size: 6rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 0.9;
+
+    &.dj-label {
+      background: linear-gradient(90deg, #000000, #e66802);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    &.skill-label,
+    &.prod-label {
+      color: #000000;
+    }
+  }
+}
+
+.audio-playlist {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 20px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color: black;
+  color: #fff;
+  transition: background 0.2s ease-in-out;
+  margin-bottom: 60px;
+
+  h2 {
+    font-size: 6rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+  }
+
+  // Le canvas en arrière-plan
+  .audio-visualizer {
+    width: 100%;
+    height: 100px; // Ajustez la hauteur si besoin
+    margin: 10px 0;
+    pointer-events: none;
+    opacity: 1 !important;
+    transition: opacity 0.3s;
+  }
+
+  // Animation visible en lecture
+  &.is-playing {
+    .audio-visualizer {
+      opacity: 1 !important;
+    }
+  }
+
+  .content-wrapper {
+    position: relative;
+    z-index: 1;
+    padding-left: 2rem;
+  }
+  
+  .now-playing-popup {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: relative;
+    margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 3;
+  }
+  
+  .now-playing-popup img {
+    margin: 0;
+    margin-right: 1rem;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .now-playing-popup h3 {
+    font-size: 2em;
+    margin: 0;
+  }
+
+  .now-playing-info {
+    text-align: left;
+    color: #fff;
+  }
+  
+  .now-playing-popup button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background: #e66802;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  // Liste des pistes
+  .track-list {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .audio-track {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 10px;
+      width: 100%;
+      border-bottom: 1px solid #ffffff;
+    
+      img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+      }
+    
+      h3 {
+        color: #fff;
+        font-size: 1rem;
+        flex: 1;
+        display: flex;
+        align-items: flex-start !important;
+        text-align: left;
+        margin-top: 10px;
+      }
+    
+      .rhap_container {
+        flex: 2;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        background: transparent;
+        border-radius: 10px;
+        padding: 10px;
+        color: #fff;
+        
+        .rhap_controls-section {
+          flex: 0 0 auto;
+          margin-right: 1rem;
+          display: flex;
+          align-items: center;
+          button {
+            color: #fff;
+            font-size: 1.5rem;
+            margin: 0;
+            &:hover {
+              color: #e66802;
+            }
+          }
+        }
+      
+        .rhap_progress-section {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          .rhap_progress-bar {
+            background: #fff;
+            height: 6px;
+            border-radius: 5px;
+            .rhap_progress-indicator {
+              background: #e66802 !important;
+            }
+          }
+        }
+      
+        .rhap_additional-controls {
+          display: none;
+        }
+      }
+    }
+  }
+  .add-track-btn {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+    display: inline-block;
+    text-align: center;
+    width: 30%;
+    border: none;
+  }
+}
+
+// Style pour le modal
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    input[type="text"],
+    input[type="number"],
+    input[type="file"] {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+
+      .modal-btn {
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        flex: 1;
+        margin: 0 5px;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+
+        &:active {
+          transform: scale(0.98);
+        }
+      }
+
+      .add-btn {
+        background-color: #000000;
+        color: #fff;
+
+        &:hover {
+          background-color: #000000;
+        }
+
+        &:active {
+          background-color: #000000;
+        }
+      }
+
+      .cancel-btn {
+        background-color: #ff5252;
+        color: #fff;
+
+        &:hover {
+          background-color: #ff7979;
+        }
+
+        &:active {
+          background-color: #ff5252;
+        }
+      }
+    }
+  }
+}
+
+/* ============================
+   Adaptation pour tablettes
+   ============================ */
+@media (max-width: 1024px) {
+
+  .parent-container {
+    justify-content: flex-start !important; // Aligne tous les éléments à gauche
+    margin-bottom: 30px;
+  }
+  .beats-title {
+    margin-left: 0 !important;  
+    margin-right: 1rem !important;
+    text-align: left !important;
+    align-items: flex-start !important;
+    span {
+      font-size: 4rem;
+    }
+  }
+
+  .audio-playlist {
+    h2 {
+      font-size: 4rem;
+    }
+    .audio-visualizer {
+      height: 80px;
+    }
+    .track-list {
+      .audio-track {
+        img {
+          width: 80px;
+          height: 80px;
+        }
+        h3 {
+          font-size: 0.9rem;
+        }
+      }
+    }
+    .add-track-btn {
+      width: 50%;
+    }
+  }
+}
+
+/* ============================
+   Adaptation pour mobiles
+   ============================ */
+@media (max-width: 768px) {
+  .parent-container {
+    justify-content: flex-start !important; // Aligne tous les éléments à gauche
+    margin-bottom: 30px;
+  }
+  .beats-title {
+    margin-left: 0 !important;  
+    margin-right: 1rem !important;
+    text-align: left !important;
+    align-items: flex-start !important;
+    span {
+      font-size: 3rem;
+    }
+  }
+
+  .audio-playlist canvas {
+    display: none !important;
+  }
+  .audio-playlist {
+    padding: 10px;
+    transition: none;
+    h2 {
+      font-size: 3rem;
+    }
+    
+    .now-playing-popup {
+      flex-direction: column;
+      align-items: center;
+      img {
+        width: 150px;
+        height: 150px;
+        margin: 0;
+        margin-bottom: 10px;
+      }
+      h3 {
+        text-align: center;
+      }
+
+      .now-playing-info {
+        text-align: center;
+      }
+    }
+    .track-list {
+      .audio-track {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+        img {
+          width: 60px;
+          height: 60px;
+        }
+        h3 {
+          font-size: 0.8rem;
+          margin-top: 5px;
+        }
+        .rhap_container {
+          flex-direction: column;
+          .rhap_controls-section {
+            margin-right: 0;
+            margin-bottom: 5px;
+          }
+          .rhap_progress-section {
+            width: 100%;
+          }
+        }
+      }
+    }
+    .add-track-btn {
+      width: 80%;
+      font-size: 14px;
+    }
+  }
+  .modal {
+    form {
+      max-width: 90%;
+      padding: 15px;
+      input[type="text"],
+      input[type="number"],
+      input[type="file"] {
+        padding: 6px;
+        font-size: 14px;
+      }
+      .modal-buttons {
+        .modal-btn {
+          padding: 8px 15px;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+/* ===============================================
+   Nouveau : repositionnement du bouton lecture
+   =============================================== */
+.track-list .audio-track {
+  position: relative;
+}
+
+.track-list .audio-track .rhap_container .rhap_controls-section {
+  position: absolute !important;
+  top: 10px !important;   // Même offset que l'image dans .audio-track
+  left: 10px !important;
+  width: 100px !important;  // Dimension pour desktop (image 100x100)
+  height: 100px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+  z-index: 10 !important;
+}
+
+/* Adaptation pour tablettes (image 80x80) */
+@media (max-width: 1024px) {
+  .track-list .audio-track .rhap_container .rhap_controls-section {
+    width: 80px !important;
+    height: 80px !important;
+  }
+}
+
+/* Adaptation pour mobiles (image 60x60) */
+@media (max-width: 768px) {
+  .track-list .audio-track .rhap_container .rhap_controls-section {
+    width: 60px !important;
+    height: 60px !important;
+  }
+}
+
+/* ===============================================
+   Nouveau : suppression du contrôleur de volume
+   =============================================== */
+.rhap_volume-controls {
+  display: none !important;
+}

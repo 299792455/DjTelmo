@@ -1,0 +1,152 @@
+.about-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #000000;
+  box-sizing: border-box;
+  margin-bottom: 60px;
+  margin-top: 60px;
+}
+
+.about-content-dev {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem; /* Espace entre le titre et le contenu */
+}
+
+.about-title {
+  display: flex;
+  flex-direction: column; /* Aligne les mots en colonne */
+  align-items: start;
+  text-transform: uppercase;
+
+  span {
+    font-size: 6rem; /* Taille par défaut */
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 0.9;
+
+    &.dj-label {
+      background: linear-gradient(90deg, #000000, #e66802);
+      -webkit-background-clip: text; // Existant
+      background-clip: text; // Standard
+      -webkit-text-fill-color: transparent;
+    }
+
+    &.skill-label,
+    &.prod-label {
+      color: #000000;
+    }
+  }
+}
+
+.about-content {
+  display: flex;
+  align-items: center;
+  gap: 8rem; /* Espace entre l'image et le texte */
+  text-align: justify;
+
+  .about-Img {
+    width: 300px;
+    height: 300px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%; /* Rendre l'image circulaire */
+      border: 5px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); /* Lumière violette autour */
+    }
+  }
+
+  .about-text {
+    flex: 1; /* Le texte prend tout l'espace disponible */
+    p {
+      font-size: 1.2rem !important;
+      line-height: 1.7;
+      padding: 10px 20px;
+    }
+  }
+}
+
+/* Responsive styles */
+
+/* Point de rupture à 1024px */
+@media (max-width: 1024px) {
+  .about-content {
+    gap: 3rem; /* Réduit l'espace entre l'image et le texte */
+  }
+
+  .about-title span {
+    font-size: 5rem; /* Réduction de la taille du titre */
+  }
+
+  .about-Img {
+    width: 300px;
+    height: 300px; /* Réduit la taille de l'image */
+  }
+
+  .about-text {
+    font-size: 1.2rem; /* Taille du texte légèrement réduite */
+  }
+}
+
+/* Point de rupture à 768px (tablette et mobile) */
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column; /* Empile l'image et le texte verticalement */
+    align-items: center;
+    text-align: center; /* Centre le texte */
+    gap: 2rem;
+  }
+
+  .about-title span {
+    font-size: 4rem; /* Réduction supplémentaire pour les tablettes */
+  }
+
+  .about-Img {
+    width: 250px;
+    height: 250px;
+  }
+
+  .about-text {
+    font-size: 1.1rem;
+  }
+
+  /* Repositionnement pour placer l'image au-dessus du titre */
+  .about-container {
+    position: relative;
+  }
+  .about-Img {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  /* Ajout d'une marge supérieure sur le conteneur de contenu pour laisser place à l'image */
+  .about-content-dev {
+    margin-top: 270px; // Ajustez cette valeur selon la hauteur de l'image et l'espacement souhaité
+  }
+}
+
+/* Point de rupture à 480px */
+@media (max-width: 480px) {
+  .about-title span {
+    font-size: 2rem; /* Taille réduite pour les petits écrans */
+  }
+
+  .about-Img {
+    width: 200px !important;
+    height: 200px !important;
+    margin-bottom: 30px !important; /* Espace supplémentaire sous l'image */
+    
+  }
+
+  .about-text {
+    font-size: 1rem; /* Réduction supplémentaire du texte */
+    p {
+      margin-top: 0;
+    }
+  }
+}

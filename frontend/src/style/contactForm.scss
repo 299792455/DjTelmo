@@ -1,0 +1,138 @@
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px;
+    width: 100%;
+    max-width: 1024px;
+
+    .logo img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50px;
+      margin-top: 10px; // Réduire l'espace au-dessus du logo
+      margin-bottom: 25px; // Réduire l'espace sous le logo
+      border: solid 1px black;
+    }
+    
+    h2 {
+      font-size: 6rem;
+      letter-spacing: -0.05em;
+      font-weight: 800;
+      text-align: center;
+      line-height: 1;
+      margin-top: 0; // Supprime toute marge inutile
+      margin-bottom: 20px; // Ajuste l'espacement si nécessaire
+    }
+    
+    .form-fields-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .input-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      width: 100%;
+
+      label {
+        color: black;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 1rem;
+        background: black;
+        color: white;
+        border-radius: 10px;
+        border: 1px solid white;
+        font-size: large;
+        box-sizing: border-box;
+      }
+
+      textarea {
+        height: 150px;
+      }
+    }
+
+    button {
+      padding: 1rem 6rem;
+      border: none;
+      background: #000000;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+      margin-top: 20px;
+      width: 30%; // Assurer que le bouton prend toute la largeur
+
+      &:hover {
+        transform: scale(1.1);
+        color: #ffffff;
+        transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+      }
+    }
+  }
+
+  /* Adaptation pour tablettes (max-width: 900px) */
+  @media (max-width: 900px) {
+    .contact-form {
+      h2 {
+        font-size: 4rem;
+      }
+
+      .form-fields-container {
+        width: 100%;
+      }
+
+      .input-row {
+        flex-direction: column;
+      }
+
+      
+    }
+  }
+
+  /* Adaptation pour mobiles (max-width: 480px) */
+  @media (max-width: 480px) {
+    .contact-form {
+      h2 {
+        font-size: 3rem;
+      }
+
+      .form-fields-container {
+        padding: 0 10px;
+      }
+
+      button {
+        width: 50% !important;
+        padding: 1rem 2rem; // Réduction du padding horizontal pour mieux s'adapter
+        box-sizing: border-box; // Assure que le padding est inclus dans la largeur
+      }
+    }
+  }
+}

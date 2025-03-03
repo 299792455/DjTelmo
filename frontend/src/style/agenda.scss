@@ -1,0 +1,215 @@
+.agenda-title { 
+  font-size: 6rem; /* Taille par défaut */
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 0.9;
+  background-color: none !important;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.agenda-section {
+  /* On active le mode flex pour placer .agenda-image à droite */
+  display: flex;
+  position: relative;
+  width: 100%;
+  align-items: center;
+  /* On aligne l’enfant non-absolu à l’extrémité droite */
+  justify-content: flex-end;
+  margin-top: 40px;
+}
+
+/* ==================== */
+/* COLONNE IMAGE À DROITE*/
+/* ==================== */
+.agenda-image {
+  /* La seule child en “flow” => se cale à droite grâce au flex + justify-content: flex-end */
+  position: relative;
+  z-index: 1;              /* Pour qu’elle soit derrière la liste si besoin */
+  width: 60%;             /* Ajuste comme tu veux */
+  min-height: 60vh;       /* Hauteur de l’image */
+  background: url('../style/Medias/agenda.jpg') no-repeat center center;
+  background-size: cover;
+  box-shadow: 0 0 20px rgb(0, 0, 0); /* Lumière violette autour */
+}
+
+/* ==================== */
+/* LISTE ABSOLUE À GAUCHE*/
+/* ==================== */
+.agenda-list {
+  /* Hors flow, donc se superpose par-dessus l’image */
+  position: absolute;
+  z-index: 2;             /* Au-dessus de .agenda-image (z-index:1) */
+  
+  /* Décalage vertical */
+  top: 50%;
+  transform: translateY(-50%);
+
+  /* Décalage horizontal (à 5% du bord gauche) */
+  left: 5%;
+  
+  /* Dimensions de la liste */
+  width: 65%;  /* Ajuste selon l’effet de chevauchement souhaité */
+  height: auto;
+
+  /* Style visuel */
+  background-color: rgba(0, 0, 0, 0.911);
+  padding: 30px;
+  color: white;
+  align-items: center;
+  justify-content: center;
+  
+  .event-card {
+    border-bottom: 1px solid #999;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .event-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center !important;
+    text-align: left;
+  }
+  
+  .left-block {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+  }
+  
+  .event-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+    text-align: left;
+  }
+  
+  .event-location {
+    display: inline-block;    /* ou display: inline; selon le besoin */
+    background-color: rgb(235, 114, 14);
+    font-weight: thin;
+    color: #000;
+    margin: 0;
+    padding: 0.3rem 0.3rem;   /* pour donner un léger “coussin” autour du texte */
+    line-height: 1;           /* pour éviter un trop grand espacement vertical */
+    max-width: 9vh;
+    margin-top: 5px;
+    text-align: center;
+  }
+  
+  .event-date {
+    width: 30%;
+    font-size: 1.8rem;
+    line-height: 2rem;
+    transform: scaleY(1.3);
+    letter-spacing: 0.05;
+    font-weight: bold;
+    text-align: right;
+    margin-right: 20px;
+  }
+
+  .add-event-btn {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+    display: inline-block;
+    text-align: center;
+    width: 30%;
+    border: none;
+  }
+}
+
+// Style pour la modale d'ajout d'événement (identique à celle de Beats)
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  
+  form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+    box-sizing: border-box;
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"] {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+
+      .modal-btn {
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        flex: 1;
+        margin: 0 5px;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+
+        &:active {
+          transform: scale(0.98);
+        }
+      }
+
+      .add-btn {
+        background-color: #000000 !important; // couleur noire pour l'ajout
+        color: #fff !important;
+
+        &:hover {
+          background-color: #000000;
+        }
+
+        &:active {
+          background-color: #000000;
+        }
+      }
+
+      .cancel-btn {
+        background-color: #ff5252; // rouge pour annuler
+        color: #fff;
+
+        &:hover {
+          background-color: #ff7979;
+        }
+
+        &:active {
+          background-color: #ff5252;
+        }
+      }
+    }
+  }
+}
