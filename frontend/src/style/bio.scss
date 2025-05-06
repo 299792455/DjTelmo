@@ -17,7 +17,7 @@
 
 .about-title {
   display: flex;
-  flex-direction: column; /* Aligne les mots en colonne */
+  flex-direction: column; /* Desktop : en colonne (3 lignes) */
   align-items: start;
   text-transform: uppercase;
 
@@ -30,7 +30,7 @@
     &.dj-label {
       background: linear-gradient(90deg, #000000, #e66802);
       -webkit-background-clip: text; // Existant
-      background-clip: text; // Standard
+      background-clip: text;         // Standard
       -webkit-text-fill-color: transparent;
     }
 
@@ -47,39 +47,48 @@
   gap: 8rem; /* Espace entre l'image et le texte */
   text-align: justify;
 
-  .about-Img {
-    width: 300px;
-    height: 300px;
-
-    img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%; /* Rendre l'image circulaire */
-      border: 5px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); /* Lumière violette autour */
+  .about-Img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.8);
+    animation: glowPulse 5s infinite ease-in-out;
+    
+  }
+  
+  @keyframes glowPulse {
+    0% {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+   
+    50% {
+      box-shadow: 0 0 45px rgb(0, 0, 0);
+    }
+   
+    100% {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
   }
+  
+  
 
   .about-text {
-    flex: 1; /* Le texte prend tout l'espace disponible */
+    width: 80%; /* Le texte prend tout l'espace disponible */
     p {
       font-size: 1.2rem !important;
       line-height: 1.7;
       padding: 10px 20px;
+      text-align: justify;
     }
   }
 }
 
-/* Responsive styles */
-
-/* Point de rupture à 1024px */
+/* =========================
+   Point de rupture à 1024px
+   ========================= */
 @media (max-width: 1024px) {
   .about-content {
     gap: 3rem; /* Réduit l'espace entre l'image et le texte */
-  }
-
-  .about-title span {
-    font-size: 5rem; /* Réduction de la taille du titre */
   }
 
   .about-Img {
@@ -90,9 +99,31 @@
   .about-text {
     font-size: 1.2rem; /* Taille du texte légèrement réduite */
   }
+
+  /* 
+    >>> NOUVEAU : on force le titre en une seule ligne, 
+    centré, et intégralement en noir (on supprime le gradient). 
+  */
+  .about-title {
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+
+    span {
+      background: none !important;
+      color: #000 !important;
+      -webkit-text-fill-color: #000 !important;
+      /* Petite marge horizontale pour séparer "DJ", "COMPOSER", "PRODUCER" */
+      margin: 0 5px;
+      font-size: 5rem; /* Réduction pour tablette */
+    }
+  }
 }
 
-/* Point de rupture à 768px (tablette et mobile) */
+/* =========================
+   Point de rupture à 768px
+   ========================= */
 @media (max-width: 768px) {
   .about-content {
     flex-direction: column; /* Empile l'image et le texte verticalement */
@@ -101,8 +132,9 @@
     gap: 2rem;
   }
 
+  /* On réduit encore la taille du titre si besoin */
   .about-title span {
-    font-size: 4rem; /* Réduction supplémentaire pour les tablettes */
+    font-size: 4rem; 
   }
 
   .about-Img {
@@ -124,23 +156,25 @@
     left: 50%;
     transform: translateX(-50%);
   }
-  /* Ajout d'une marge supérieure sur le conteneur de contenu pour laisser place à l'image */
+  /* Ajout d'une marge supérieure sur le conteneur de contenu
+     pour laisser la place à l'image */
   .about-content-dev {
-    margin-top: 270px; // Ajustez cette valeur selon la hauteur de l'image et l'espacement souhaité
+    margin-top: 270px; // Ajuster selon la hauteur de l'image
   }
 }
 
-/* Point de rupture à 480px */
+/* =========================
+   Point de rupture à 480px
+   ========================= */
 @media (max-width: 480px) {
   .about-title span {
-    font-size: 2rem; /* Taille réduite pour les petits écrans */
+    font-size: 3rem; /* Taille réduite pour les petits écrans */
   }
 
   .about-Img {
     width: 200px !important;
     height: 200px !important;
     margin-bottom: 30px !important; /* Espace supplémentaire sous l'image */
-    
   }
 
   .about-text {

@@ -1,6 +1,6 @@
 .carousel-banner {
-  margin: 0 auto;         // centre horizontalement
-  overflow: hidden;       // masque la partie “hors-champ”
+  margin: 0 auto;         
+  overflow: hidden;       
   white-space: nowrap;    
   position: relative;
   padding: 10px 0;
@@ -8,10 +8,8 @@
   margin-top: 20px;
   margin-bottom: 20px;
 
-
   .carousel-track {
     display: inline-flex;
-    // Astuce : on déclenche l'animation “scroll” (définie plus bas)
     animation: scroll 15s linear infinite;
     will-change: transform; // Optimisation du rendu
   }
@@ -22,6 +20,12 @@
     margin-right: 20px;
     border-radius: 10px;
     object-fit: cover;
+
+    // **Ajouts pour un affichage plus net et fluide**
+    image-rendering: auto; // Garde la meilleure qualité
+    min-width: 200px; // Évite les images écrasées
+    max-height: auto; // Ajuste la hauteur max pour éviter les distorsions
+    transition: transform 0.2s ease-in-out; // Animation douce
   }
 }
 
@@ -31,7 +35,6 @@
     transform: translateX(0);
   }
   100% {
-    // -50% correspond à la moitié de la track (puisqu'elle est doublée)
     transform: translateX(-50%);
   }
 }
